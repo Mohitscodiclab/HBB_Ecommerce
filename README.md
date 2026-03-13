@@ -34,10 +34,10 @@ Status: 100% READY FOR TERRAFORMING
 *Visual logs of the terraforming terminal. Replace these placeholders with your actual screenshot URLs.*
 
 <div align="center">
-<img src="YOUR_SCREENSHOT_LINK_1" width="45%" alt="Mobile Interface" />
-<img src="YOUR_SCREENSHOT_LINK_2" width="45%" alt="Product Matrix" />
+<img src="user_interface.png" width="45%" alt="Interface" />
+<img src="Products" width="45%" alt="Product Matrix" />
 
-<img src="YOUR_SCREENSHOT_LINK_3" width="91%" alt="Cart Logic View" />
+<img src="cart" width="91%" alt="Cart Logic View" />
 </div>
 
 ## 🛸 ABOUT THE OUTPOST
