@@ -54,13 +54,14 @@ Status: 100% READY FOR TERRAFORMING
   </table>
 </div>
 
-## 🛸 ABOUT THE OUTPOST
-
-Welcome to the **Hindustan Beej Bhandar (HBB)** digital interface. We are a premier agricultural distribution hub. Whether you are a local Earthling looking to cultivate your patch of land or an interstellar colonist attempting to terraform a new sector, our vault contains the highest-grade biological blueprints (seeds) and plant-defense mechanisms.
 
 <div align="center">
   <h3><a href="https://mohitscodiclab.github.io/HBB_Ecommerce/">🚀 ESTABLISH CONNECTION TO LIVE SERVER</a></h3>
 </div>
+
+## 🛸 ABOUT THE OUTPOST
+
+Welcome to the **Hindustan Beej Bhandar (HBB)** digital interface. We are a premier agricultural distribution hub. Whether you are a local Earthling looking to cultivate your patch of land or an interstellar colonist attempting to terraform a new sector, our vault contains the highest-grade biological blueprints (seeds) and plant-defense mechanisms.
 
 ## 🧬 STATION INVENTORY
 
