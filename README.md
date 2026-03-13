@@ -37,10 +37,6 @@ Status: 100% READY FOR TERRAFORMING
 <img src="YOUR_SCREENSHOT_LINK_1" width="45%" alt="Mobile Interface" />
 <img src="YOUR_SCREENSHOT_LINK_2" width="45%" alt="Product Matrix" />
 
-
-
-
-
 <img src="YOUR_SCREENSHOT_LINK_3" width="91%" alt="Cart Logic View" />
 </div>
 
