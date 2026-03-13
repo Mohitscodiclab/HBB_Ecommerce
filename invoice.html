@@ -45,6 +45,62 @@ font-weight:bold;
 color:#333;
 }
 
+
+
+/* Container to align buttons side-by-side */
+.action-area {
+    display: flex;
+    flex-direction: row; /* Side-by-side on desktop */
+    flex-wrap: wrap;     /* Stack on mobile if needed */
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.btn-3d {
+    padding: 14px 25px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.1s ease;
+}
+
+/* WhatsApp Green 3D */
+.whatsapp-btn {
+    background: #25D366;
+    box-shadow: 0 4px #128C7E;
+}
+
+/* Download Blue 3D */
+.download-btn {
+    background: #1976D2;
+    box-shadow: 0 4px #0D47A1;
+    display: inline-block;
+    margin-top: 25px;
+
+}
+
+/* Press effect for both */
+.btn-3d:active {
+    box-shadow: 0 1px #128C7E;
+    transform: translateY(3px);
+}
+
+@media print {
+    .action-area { display: none !important; }
+}
+
+
+
+
+
 table{
 width:100%;
 border-collapse:collapse;
@@ -117,6 +173,8 @@ background:#1ebe5d;
 
 const data = JSON.parse(localStorage.getItem("hbb_invoice"));
 
+src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+
 if(!data){
 document.getElementById("invoiceContent").innerHTML="<h2>No invoice data found</h2>";
 throw new Error("No invoice");
@@ -148,8 +206,8 @@ const whatsappMessage =
 `Invoice ID: ${data.invoiceId}%0A`+
 `Customer: ${data.customerName}%0A`+
 `Father Name: ${data.fatherName}%0A`+
-`Address: ${data.addrress}%0A`+
 `Phone: ${data.phone}%0A%0A`+
+`Email: ${data.email}%0A%0A`+
 
 `*ORDER ITEMS*%0A`+
 `${whatsappItems}%0A`+
@@ -227,17 +285,58 @@ Grand Total : ₹${data.total}
 
 </div>
 
-<div style="text-align:center">
-
-<a class="whatsapp-btn" href="${whatsappURL}" target="_blank">
-📲 Send Order Details on WhatsApp
-</a>
-
+<div class="action-area">
+    <a class="btn-3d whatsapp-btn" href="${whatsappURL}" target="_blank">
+        📲 Send on WhatsApp
+    </a>
+    
+    <button class="btn-3d download-btn" onclick="window.print()">
+        📥 Download Invoice (PDF)
+    </button>
 </div>
 
 `;
+// Add the buttons to your innerHTML
+const actionButtons = `
+<div class="action-area">
+    <button class="btn-3d download-btn" onclick="downloadInvoice()">
+        📥 Download Invoice (PDF)
+    </button>
+    <a class="btn-3d whatsapp-btn" href="${whatsappURL}" target="_blank">
+        📲 Send on WhatsApp
+    </a>
+</div>
+`;
+
+// ADD THIS FUNCTION AT THE VERY BOTTOM OF YOUR SCRIPT
+function downloadInvoice() {
+    const element = document.getElementById('invoiceContent');
+    const invoiceId = data ? data.invoiceId : "Invoice";
+    
+    // Temporarily hide buttons so they don't show up in the PDF
+    const actionArea = document.querySelector('.action-area');
+    const notice = document.querySelector('.notice');
+    actionArea.classList.add('no-print');
+    notice.classList.add('no-print');
+
+    const options = {
+        margin: 0.5,
+        filename: `HBB_Invoice_${invoiceId}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    // New Promise based usage:
+    html2pdf().set(options).from(element).save().then(() => {
+        // Bring buttons back after downloading
+        actionArea.classList.remove('no-print');
+        notice.classList.remove('no-print');
+    });
+}
 
 </script>
 
 </body>
-</html>
+</html> 
+
