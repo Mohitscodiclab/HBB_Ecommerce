@@ -31,20 +31,36 @@ Status: 100% READY FOR TERRAFORMING
 
 ## 📡 SATELLITE IMAGERY [WEB-INTERFACE]
 
-*Visual logs of the terraforming terminal. Replace these placeholders with your actual screenshot URLs.*
+*Visual logs of the terraforming terminal captured via orbital reconnaissance.*
 
 <div align="center">
-<img src="user_interface.png" width="45%" alt="Interface" />
-<img src="Products" width="45%" alt="Product Matrix" />
-
-<img src="cart" width="91%" alt="Cart Logic View" />
+  <table style="width:100%; border:none;">
+    <tr>
+      <td align="center">
+        <img src="user_interface.png" width="400px" alt="User Interface" />
+        <br><sub><b>Main Terminal Interface</b></sub>
+      </td>
+      <td align="center">
+        <img src="cart.png" width="400px" alt="Cart System" />
+        <br><sub><b>Biological Payload Selection (Cart)</b></sub>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" colspan="2">
+        <img src="checkout.png" width="600px" alt="Checkout Process" />
+        <br><sub><b>Secure Checkout & Neural Link Transmission</b></sub>
+      </td>
+    </tr>
+  </table>
 </div>
 
 ## 🛸 ABOUT THE OUTPOST
 
 Welcome to the **Hindustan Beej Bhandar (HBB)** digital interface. We are a premier agricultural distribution hub. Whether you are a local Earthling looking to cultivate your patch of land or an interstellar colonist attempting to terraform a new sector, our vault contains the highest-grade biological blueprints (seeds) and plant-defense mechanisms.
 
-**🌍 Direct Access:** [https://mohitscodiclab.github.io/HBB_Ecommerce/](https://mohitscodiclab.github.io/HBB_Ecommerce/)
+<div align="center">
+  <h3><a href="https://mohitscodiclab.github.io/HBB_Ecommerce/">🚀 ESTABLISH CONNECTION TO LIVE SERVER</a></h3>
+</div>
 
 ## 🧬 STATION INVENTORY
 
