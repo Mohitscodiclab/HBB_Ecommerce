@@ -1,12 +1,3 @@
-This is such a fun idea! Taking a traditional seed and agriculture shop and giving it a cyberpunk/sci-fi spin is exactly the kind of creative coding that makes web development awesome.
-
-Since standard GitHub `README.md` files don't run regular CSS animations, we achieve that futuristic animated feel using **dynamic typing SVGs**, **animated GIFs**, and **HTML terminal blocks** that render perfectly in Markdown.
-
-Here is a highly interactive, sci-fi-themed `README.md` for your project. Copy the code block below and paste it directly into your `README.md` file!
-
----
-
-```markdown
 <div align="center">
 
 <img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=700&size=35&pause=1000&color=25D366&center=true&vCenter=true&width=800&lines=SYSTEM+ONLINE...;UPLINK+ESTABLISHED...;WELCOME+TO+HINDUSTAN+BEEJ+BHANDAR" alt="Typing SVG" />
