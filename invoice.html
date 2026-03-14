@@ -173,168 +173,130 @@ background:#1ebe5d;
 
 const data = JSON.parse(localStorage.getItem("hbb_invoice"));
 
-src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-
-if(!data){
-document.getElementById("invoiceContent").innerHTML="<h2>No invoice data found</h2>";
-throw new Error("No invoice");
+if (!data) {
+    document.getElementById("invoiceContent").innerHTML = "<h2>No invoice data found</h2>";
+    throw new Error("No invoice");
 }
 
-let rows="";
-let whatsappItems="";
+let rows = "";
+let whatsappItems = "";
+let calculatedGrandTotal = 0; // We recalculate to be 100% sure
 
-data.items.forEach(item=>{
+data.items.forEach(item => {
+    // FIX: Remove commas and convert to number
+    const unitPrice = parseFloat(String(item.price).replace(/,/g, '')) || 0;
+    const qty = parseInt(item.quantity) || 0;
+    const subtotal = unitPrice * qty;
+    
+    calculatedGrandTotal += subtotal;
 
-let subtotal=item.price*item.quantity;
+    // Format for Table (e.g., 1,66,547.28)
+    const displayPrice = unitPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+    const displaySubtotal = subtotal.toLocaleString('en-IN', { minimumFractionDigits: 2 });
 
-rows+=`
-<tr>
-<td>${item.name}</td>
-<td>${item.quantity}</td>
-<td>₹${item.price}</td>
-<td>₹${subtotal}</td>
-</tr>
-`;
+    rows += `
+    <tr>
+        <td>${item.name}</td>
+        <td>${qty}</td>
+        <td>₹${displayPrice}</td>
+        <td>₹${displaySubtotal}</td>
+    </tr>
+    `;
 
-whatsappItems+=`${item.name} x${item.quantity} = ₹${subtotal}%0A`;
-
+    whatsappItems += `${item.name} x${qty} = ₹${displaySubtotal}%0A`;
 });
 
+// Format the final total for display
+const finalTotalDisplay = calculatedGrandTotal.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+
 const whatsappMessage =
-
-`*HINDUSTAN BEEJ BHANDAR ORDER*%0A%0A`+
-`Invoice ID: ${data.invoiceId}%0A`+
-`Customer: ${data.customerName}%0A`+
-`Father Name: ${data.fatherName}%0A`+
-`Phone: ${data.phone}%0A%0A`+
-`Email: ${data.email}%0A%0A`+
-
-`*ORDER ITEMS*%0A`+
-`${whatsappItems}%0A`+
-
-`Grand Total: ₹${data.total}%0A%0A`+
-
-`UTR: ${data.utr}%0A%0A`+
-
-`I have also attached payment screenshot and order screenshot.`;
+    `*HINDUSTAN BEEJ BHANDAR ORDER*%0A%0A` +
+    `Invoice ID: ${data.invoiceId}%0A` +
+    `Customer: ${data.customerName}%0A` +
+    `Father Name: ${data.fatherName}%0A` +
+    `Phone: ${data.phone}%0A%0A` +
+    `*ORDER ITEMS*%0A` +
+    `${whatsappItems}%0A` +
+    `Grand Total: ₹${finalTotalDisplay}%0A%0A` +
+    `UTR: ${data.utr}%0A%0A` +
+    `Payment App: ${data.paymentApp}%0A%0A` +
+    `I have also attached payment screenshot and order screenshot.`;
 
 const whatsappURL = `https://wa.me/919931753119?text=${whatsappMessage}`;
 
-document.getElementById("invoiceContent").innerHTML=`
-
+// Update the UI
+document.getElementById("invoiceContent").innerHTML = `
 <div class="section">
-
-<div><span class="label">Invoice ID:</span> ${data.invoiceId}</div>
-<div><span class="label">Date:</span> ${data.date}</div>
-
+    <div><span class="label">Invoice ID:</span> ${data.invoiceId}</div>
+    <div><span class="label">Date:</span> ${data.date}</div>
 </div>
 
 <div class="section">
-
-<div><span class="label">Customer Name:</span> ${data.customerName}</div>
-<div><span class="label">Father Name:</span> ${data.fatherName}</div>
-<div><span class="label">Phone:</span> ${data.phone}</div>
-<div><span class="label">Email:</span> ${data.email}</div>
-
+    <div><span class="label">Customer Name:</span> ${data.customerName}</div>
+    <div><span class="label">Father Name:</span> ${data.fatherName}</div>
+    <div><span class="label">Phone:</span> ${data.phone}</div>
 </div>
 
 <div class="section">
-
-<div class="label">Address</div>
-
-${data.address}<br>
-${data.district}, ${data.state} - ${data.pincode}
-
+    <div class="label">Address</div>
+    ${data.address}<br>
+    ${data.district}, ${data.state} - ${data.pincode}
 </div>
 
 <div class="section">
-
-<div><span class="label">Payment App:</span> ${data.paymentApp}</div>
-<div><span class="label">UTR / Transaction ID:</span> ${data.utr}</div>
-
+    <div><span class="label">Payment App:</span> ${data.paymentApp}</div>
+    <div><span class="label">UTR / Transaction ID:</span> ${data.utr}</div>
 </div>
 
 <table>
-
-<tr>
-<th>Item</th>
-<th>Qty</th>
-<th>Price</th>
-<th>Total</th>
-</tr>
-
-${rows}
-
+    <tr>
+        <th>Item</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Total</th>
+    </tr>
+    ${rows}
 </table>
 
 <div class="total">
-
-Grand Total : ₹${data.total}
-
+    Grand Total : ₹${finalTotalDisplay}
 </div>
 
 <div class="notice">
-
-⚠️ IMPORTANT  
-
-1️⃣ Please SCREENSHOT this invoice page  
-
-2️⃣ Also take screenshot of your PAYMENT confirmation  
-
-3️⃣ Send both screenshots on WhatsApp to confirm your order.
-
+    ⚠️ IMPORTANT<br>
+    1️⃣ Please SCREENSHOT this invoice page<br>
+    2️⃣ Also take screenshot of your PAYMENT confirmation<br>
+    3️⃣ Send both on WhatsApp to confirm order.
 </div>
 
 <div class="action-area">
     <a class="btn-3d whatsapp-btn" href="${whatsappURL}" target="_blank">
         📲 Send on WhatsApp
     </a>
-    
-    <button class="btn-3d download-btn" onclick="window.print()">
-        📥 Download Invoice (PDF)
-    </button>
-</div>
-
-`;
-// Add the buttons to your innerHTML
-const actionButtons = `
-<div class="action-area">
     <button class="btn-3d download-btn" onclick="downloadInvoice()">
         📥 Download Invoice (PDF)
     </button>
-    <a class="btn-3d whatsapp-btn" href="${whatsappURL}" target="_blank">
-        📲 Send on WhatsApp
-    </a>
 </div>
 `;
 
-// ADD THIS FUNCTION AT THE VERY BOTTOM OF YOUR SCRIPT
+// PDF Download Function
 function downloadInvoice() {
-    const element = document.getElementById('invoiceContent');
-    const invoiceId = data ? data.invoiceId : "Invoice";
-    
-    // Temporarily hide buttons so they don't show up in the PDF
-    const actionArea = document.querySelector('.action-area');
-    const notice = document.querySelector('.notice');
-    actionArea.classList.add('no-print');
-    notice.classList.add('no-print');
-
+    const element = document.body; // Use body or container for better layout
     const options = {
-        margin: 0.5,
-        filename: `HBB_Invoice_${invoiceId}.pdf`,
+        margin: 0.3,
+        filename: `HBB_Invoice_${data.invoiceId}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
-    // New Promise based usage:
+    // Hide action area during PDF generation
+    document.querySelector('.action-area').style.display = 'none';
+    
     html2pdf().set(options).from(element).save().then(() => {
-        // Bring buttons back after downloading
-        actionArea.classList.remove('no-print');
-        notice.classList.remove('no-print');
+        document.querySelector('.action-area').style.display = 'flex';
     });
 }
-
 </script>
 
 </body>
