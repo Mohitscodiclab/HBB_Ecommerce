@@ -120,6 +120,18 @@
     "visible": true
   },
   {
+    "id": 100,
+    "name": "Illigo",
+    "category": "Pesticides",
+    "description": "Effective insect control",
+    "price": 100,
+    "unit": "50gr",
+    "image": "https://i.ibb.co/pByJKYZv/image.png",
+    "emoji": "🧪",
+    "badge": "New",
+    "visible": true
+  },
+  {
     "id": 11,
     "name": "Weed Out Max",
     "category": "Herbicides",
@@ -127,6 +139,18 @@
     "price": 220,
     "unit": "500ml",
     "image": "https://images.unsplash.com/photo-1586201375761-83865001e8ac?auto=format&fit=crop&q=80&w=200",
+    "emoji": "🌾",
+    "badge": "",
+    "visible": true
+  },
+  {
+    "id": 101,
+    "name": "GLYCEL (Glyphosate 41% SL)",
+    "category": "Herbicides",
+    "description": "Clear unwanted weeds fast",
+    "price": 300,
+    "unit": "500ml",
+    "image": "https://i.ibb.co/rRMrj3wc/image.png",
     "emoji": "🌾",
     "badge": "",
     "visible": true
